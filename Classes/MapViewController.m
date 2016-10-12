@@ -67,6 +67,38 @@
 		else {
 			// Handle the nil case if necessary.
 		}
+        
+        //put stuff in here
+        
+        NSLog(@"placemarks");
+        
+        //NSLog(@"Placemark info: %@", item.placemark);
+        // Address details
+        NSDictionary *address = _placemark.addressDictionary;
+        //NSString *titleString = @"";
+        //NSString *subtitleString = @"";
+        NSString *name = @"";
+        NSString *thoroughfare = @"";
+        NSString *subThoroughfare = @"";
+        NSString *state = @"";
+        NSString *city = @"";
+        NSString *country = @"";
+        
+        name = [address objectForKey:@"Name"] ? [address objectForKey:@"Name"] : @"";
+        thoroughfare = [address objectForKey:@"Thoroughfare"] ? [address objectForKey:@"Thoroughfare"] : @"";
+        subThoroughfare = [address objectForKey:@"subThoroughfare"] ? [address objectForKey:@"subThoroughfare"] : @"";
+        state = [address objectForKey:@"State"] ? [address objectForKey:@"State"] : @"";
+        city = [address objectForKey:@"City"] ? [address objectForKey:@"City"] : @"";
+        country = [address objectForKey:@"Country"] ? [address objectForKey:@"Country"] : @"";
+        
+        NSLog(@"name= %@",name);
+        NSLog(@"thoroughfare= %@",thoroughfare);
+        NSLog(@"subThoroughfare= %@",subThoroughfare);
+        // we have received our current location, so enable the "Get Current Address" button
+
+        
+        
+
     }];
 }
 
