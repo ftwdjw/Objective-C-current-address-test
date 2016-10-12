@@ -16,7 +16,7 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;
 @property (nonatomic, strong) MKPlacemark *placemark;
-
+@property (nonatomic, strong) MKMapItem *item;
 @end
 
 @implementation MapViewController
@@ -71,12 +71,18 @@
         //put stuff in here
         
         NSLog(@"placemarks");
+       
+        
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init]; annotation.coordinate = _item.placemark.coordinate;
+        
+        //MKPlacemark *placemark = _item.placemark;
+        NSLog(@"Placemark info: %@", _item.placemark);
         
         //NSLog(@"Placemark info: %@", item.placemark);
         // Address details
         NSDictionary *address = _placemark.addressDictionary;
-        //NSString *titleString = @"";
-        //NSString *subtitleString = @"";
+        NSString *titleString = @"";
+        NSString *subtitleString = @"";
         NSString *name = @"";
         NSString *thoroughfare = @"";
         NSString *subThoroughfare = @"";
@@ -95,7 +101,19 @@
         NSLog(@"thoroughfare= %@",thoroughfare);
         NSLog(@"subThoroughfare= %@",subThoroughfare);
         // we have received our current location, so enable the "Get Current Address" button
-
+        
+        name = [address objectForKey:@"Name"] ? [address objectForKey:@"Name"] : @"";
+        thoroughfare = [address objectForKey:@"Thoroughfare"] ? [address objectForKey:@"Thoroughfare"] : @"";
+        state = [address objectForKey:@"State"] ? [address objectForKey:@"State"] : @"";
+        city = [address objectForKey:@"City"] ? [address objectForKey:@"City"] : @"";
+        country = [address objectForKey:@"Country"] ? [address objectForKey:@"Country"] : @"";
+      
+        titleString = [NSString stringWithFormat:@"%@ %@",name,thoroughfare];
+        subtitleString = [NSString stringWithFormat:@"%@ %@ %@ %@",thoroughfare, state, city, country];
+        // Strings for annotation
+        annotation.title = _item.name;
+        annotation.subtitle = subtitleString;
+        [_mapView addAnnotation:annotation];
         
         
 
