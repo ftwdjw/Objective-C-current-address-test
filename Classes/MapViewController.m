@@ -53,6 +53,12 @@
 		dispatch_once(&centerMapFirstTime, ^{
 			[self.mapView setCenterCoordinate:userLocation.coordinate animated:YES];
 		});
+        // let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 10000, 10000);
+        
+        [self.mapView setRegion:region animated:YES];
+
 	}
 	
 	// Lookup the information for the current location of the user.
